@@ -1,16 +1,15 @@
 const path = require('path'),
-         uglify = require('uglifyjs-webpack-plugin'),
-         htmlWebpackPlugin = require('html-webpack-plugin'),
-         autoprefixer = require('autoprefixer'),
-         MiniCssExtractPlugin = require('mini-css-extract-plugin'),
-         OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin'),
-         { CleanWebpackPlugin } = require("clean-webpack-plugin");
+        uglify = require('uglifyjs-webpack-plugin'),
+        htmlWebpackPlugin = require('html-webpack-plugin'),
+        autoprefixer = require('autoprefixer'),
+        MiniCssExtractPlugin = require('mini-css-extract-plugin'),
+        OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 
 const config = {
   mode: 'development', //production    development     none
   entry: {
   	index: path.resolve(__dirname, './src/js/index.js'),
-  	detail: path.resolve(__dirname, './src/js/list.js'),
+  	list: path.resolve(__dirname, './src/js/list.js'),
   },
   output: {
   	path: path.resolve(__dirname + '/dist'),
@@ -92,42 +91,39 @@ const config = {
       }
     ]
   },
-  plugins: [
+
+ plugins: [
     new uglify(),
     new OptimizeCssAssetsPlugin({}),
     new htmlWebpackPlugin({
-    	minify: {
-    		removeComments: true,
-    		collapseWhitespace: true
-    	},
-    	filename: 'index.html',
-    	template: path.resolve(__dirname, 'src/index.html'),
-    	title: '腾讯课堂首页',
+      minify: {
+      	removeComments: true,
+      	collapseWhitespace: true
+      },
+      filename: 'index.html',
+      template: path.resolve(__dirname, 'src/index.html'),
+      title: '腾讯课堂首页',
       chunksSortMode: 'manual',
+      chunks: ['index'],
       excludeChunks: ['node_modules'],
-    	chunks: ['index'],
       hash: true
     }),
     new htmlWebpackPlugin({
-    	minify: {
-    		removeComments: true,
-    		collapseWhitespace: true
-    	},
-    	filename: 'list.html',
-    	template: path.resolve(__dirname, 'src/list.html'),
-    	title: '腾讯课堂课程列表页',
+      minify: {
+        removeComments: true,
+        collapseWhitespace: true
+      },
+      filename: 'list.html',
+      template: path.resolve(__dirname, 'src/list.html'),
+      title: '腾讯课堂课程列表页',
       chunksSortMode: 'manual',
+      chunks: ['list'],
       excludeChunks: ['node_modules'],
-    	chunks: ['list'],
       hash: true
     }),
-
+ 
     new MiniCssExtractPlugin({
-        filename: 'css/[name].css'
-    }),
-
-   new CleanWebpackPlugin({
-      cleanOnceBeforeBuildPatterns: ['dist/js/*.js', 'dist/*.html','dist/img']
+    	filename: 'css/[name].css'
     })
   ],
 
