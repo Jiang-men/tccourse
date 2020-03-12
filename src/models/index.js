@@ -1,3 +1,11 @@
+import $ from 'jquery';
+import {API } from '../utils/config'
 export default class IndexModel {
-   console.log('开始项目')
+   getCourseData() {
+      return $.ajax({
+         url: API.getCourseDatas,
+         type: 'GET',
+         dataType: 'JSONP'
+       })
+    }
 }
