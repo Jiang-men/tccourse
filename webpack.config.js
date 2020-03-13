@@ -78,10 +78,11 @@ const config = {
       },
       {
         test: /\.(png|jpg|jpeg|gif|ico)$/i,
-        loaders: [
-          'url-loader?limit=1024&name=img/[name]-[hash:16].[ext]',
-          'image-webpack-loader'
-        ]
+        loaders: 'url-loader?limit=1024&name=img/[name]-[hash:16].[ext]',
+        options:{
+          publicPath:'./images'
+       }
+
       },
       {
         test: /\.(woff2?|eot|ttf|otf|svg)(\?.*)?$/i,
