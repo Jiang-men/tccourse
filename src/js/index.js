@@ -4,8 +4,13 @@ import '../scss/iconfont.css'
 
 import Header from '../components/header';
 import Footer from '../components/footer';
+import CarouselComponent from '../components/carousel';
+
+import { CAROUSEL } from '../utils/config';
+import Carousel from '../modules/Carousel';
 
 import IndexModel from '../models/index';
+
 
 ; (async ($) => {
   const $app = $('#app'),
@@ -17,16 +22,23 @@ import IndexModel from '../models/index';
 
 
   const header = new Header(fields),
-          footer = new Footer()
+          footer = new Footer(),
+          carousel = new CarouselComponent(swipers)
 
   const init = () => {
-      render()
+    render();
+    loadModules();
   }
 
   function render() {
     $container.append(header.tpl(fields));
+    $container.append(carousel.tpl());
     $container.append(footer.tpl());
     $app.append($container);
+  }
+
+  function loadModules() {
+    new Carousel(CAROUSEL).init()
   }
 
   init();
