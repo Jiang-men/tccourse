@@ -6,7 +6,7 @@ const API = {
 
 const CAROUSEL = {
 	autoplay: true,
-	duration: 3000
+	duration: 5000
 }
 
 export {
