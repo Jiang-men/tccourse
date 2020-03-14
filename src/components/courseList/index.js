@@ -1,15 +1,17 @@
 import tpl from './index.tpl';
-import moreTpl from './tpl/more.tpl';
 import './index.scss';
 import { tplReplace } from '../../utils/tools';
+import List from './list';
+
 export default () => {
+  const list = new List();
   return {
-    name: 'indexTitle',
-    tpl(titleText, showMore) {
+    name: 'ListBoard',
+    tpl(data) {
       return tplReplace(tpl, {
-        titleText,
-        more: showMore ? moreTpl() : ''
-      })
+        list: list.tpl(data)
+      });
     }
   }
+
 }
